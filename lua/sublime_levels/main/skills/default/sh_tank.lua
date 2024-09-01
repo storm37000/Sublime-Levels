@@ -16,8 +16,8 @@ SKILL.Category          = "Physical"
 SKILL.Identifier        = "npc_damage_resistance";
 
 -- The amount of buttons on the skill page.
-SKILL.ButtonAmount      = 5;
-SKILL.AmountPerPoint    = 10;
+SKILL.ButtonAmount      = 10;
+SKILL.AmountPerPoint    = 5;
 
 -- Should we enable this skill?
 SKILL.Enabled           = true;
