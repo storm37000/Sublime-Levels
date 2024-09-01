@@ -7,7 +7,7 @@ local SKILL = {};
 SKILL.Name              = "A Glitch In The Boullet";
 
 -- The description of the skill.
-SKILL.Description       = "After shooting you'll have a small chance to not consume the bullet.\nUp to a total of 5%";
+SKILL.Description       = "After shooting you'll have a small chance to not consume the bullet.\nUp to a total of 10%";
 
 -- If the category of the skill does not exist then we will automatically create it.
 SKILL.Category          = "Weapons"
@@ -16,7 +16,7 @@ SKILL.Category          = "Weapons"
 SKILL.Identifier        = "bullet";
 
 -- The amount of buttons on the skill page.
-SKILL.ButtonAmount      = 5;
+SKILL.ButtonAmount      = 10;
 SKILL.AmountPerPoint    = 1;
 
 -- Should we enable this skill?

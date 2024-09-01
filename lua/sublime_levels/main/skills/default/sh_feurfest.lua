@@ -1,4 +1,8 @@
-
+--[[------------------------------------------------------------------------------
+ *  Copyright (C) Fluffy(76561197976769128 - STEAM_0:0:8251700) - All Rights Reserved
+ *  Unauthorized copying of this file, via any medium is strictly prohibited
+ *  Proprietary and confidential
+--]]------------------------------------------------------------------------------
 
 local path  = Sublime.GetCurrentPath();
 local SKILL = {};
@@ -20,28 +24,31 @@ SKILL.ButtonAmount      = 10;
 SKILL.AmountPerPoint    = 7.5;
 
 -- Should we enable this skill?
-SKILL.Enabled           = true;
+SKILL.Enabled           = true
 
 if (SERVER and SKILL.Enabled) then
-    hook.Add("EntityTakeDamage", path, function(ent, dmg)
-        if (not Sublime.Settings.Get("other", "skills_enabled", "boolean")) then
-            return;
-        end
+	hook.Add("EntityTakeDamage", path, function(ent, dmg)
+		if (not Sublime.Settings.Get("other", "skills_enabled", "boolean")) then return end
 
-        if (IsValid(ent) and ent:IsPlayer()) then
-            if (dmg:GetDamage() > 1 and dmg:IsDamageType(DMG_BURN)) then
-                local points = ent:SL_GetInteger(SKILL.Identifier, 0) * SKILL.AmountPerPoint;
+		if (dmg:GetDamage() > 1 and dmg:IsDamageType(DMG_BURN)) then
 
-                if (points < 1) then
-                    return;
-                end
+			local ply
+			if not ent:IsPlayer() then
+				ply = ent:CPPIGetOwner()
+				if ply == nil then return end
+			else
+				ply = ent
+			end
+			if IsValid(ply) then
+				local points = ply:SL_GetInteger(SKILL.Identifier, 0) * SKILL.AmountPerPoint
 
-                local modifier = 1 - (points / 100);
-
-                dmg:ScaleDamage(modifier);
-            end
-        end
-    end);
+				if (points > 0) then
+					local modifier = 1 - (points / 100)
+					dmg:ScaleDamage(modifier)
+				end
+			end
+		end
+	end)
 end
 
 Sublime.AddSkill(SKILL);
